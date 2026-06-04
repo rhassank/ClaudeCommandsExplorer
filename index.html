@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Claude Code Slash Commands — Reference</title>
+<meta name="description" content="A searchable reference of every built-in command, bundled skill, and workflow in Claude Code — sourced from the official Anthropic documentation." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#0b0e14; --bg-soft:#11151f; --surface:#161b27; --surface-2:#1c2230; --surface-3:#232a3a;
+    --border:#2a3242; --border-soft:#222937; --text:#e6e9f0; --text-dim:#9aa4b8; --text-faint:#687185;
+    --accent:#ff6a3d; --accent-soft:#ff8a63; --accent-glow:rgba(255,106,61,0.16); --accent-line:rgba(255,106,61,0.42);
+    --builtin:#9aa4b8; --builtin-bg:rgba(154,164,184,0.12);
+    --skill:#57c98a; --skill-bg:rgba(87,201,138,0.13);
+    --workflow:#a78bfa; --workflow-bg:rgba(167,139,250,0.14);
+    --radius:14px; --radius-sm:9px; --shadow:0 10px 40px -12px rgba(0,0,0,0.6);
+    --mono:"JetBrains Mono",ui-monospace,Menlo,monospace; --sans:"Inter",system-ui,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:var(--sans);background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.5}
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+    background:radial-gradient(720px 420px at 82% -8%,var(--accent-glow),transparent 60%),radial-gradient(620px 380px at -6% 4%,rgba(79,209,197,0.07),transparent 55%)}
+  .wrap{position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:0 22px}
+  a{color:var(--accent-soft);text-decoration:none}a:hover{text-decoration:underline}
+  header.top{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);background:rgba(11,14,20,.78);border-bottom:1px solid var(--border-soft)}
+  .top-inner{display:flex;align-items:center;gap:16px;height:60px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:-.01em;color:inherit}
+  .brand .glyph{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;background:linear-gradient(135deg,var(--accent),#d9482a);color:#1a0d08;font-family:var(--mono);font-weight:700;font-size:17px;box-shadow:0 0 0 1px rgba(255,255,255,.06),0 4px 14px -4px var(--accent)}
+  .brand b{font-size:15px}.brand span{color:var(--text-faint);font-weight:500;font-size:13px}
+  .top-spacer{flex:1}
+  .top-links{display:flex;gap:4px}
+  .top-links a{color:var(--text-dim);font-size:13.5px;font-weight:500;padding:7px 11px;border-radius:8px;transition:.15s}
+  .top-links a:hover{color:var(--text);background:var(--surface-2);text-decoration:none}
+  .gh{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--border);color:var(--text);padding:7px 13px;border-radius:9px;font-size:13px;font-weight:600;transition:.15s}
+  .gh:hover{border-color:var(--accent-line);background:var(--accent-glow);text-decoration:none}.gh svg{width:16px;height:16px;fill:currentColor}
+  .intro{padding:40px 0 8px}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;color:var(--accent-soft);border:1px solid var(--accent-line);background:var(--accent-glow);padding:5px 11px;border-radius:999px;margin-bottom:18px}
+  .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--accent)}
+  h1.title{font-size:clamp(28px,4.6vw,46px);line-height:1.05;margin:0 0 14px;letter-spacing:-.025em;font-weight:800}
+  h1.title .hl{color:var(--accent)}
+  .lede{color:var(--text-dim);font-size:clamp(15px,1.6vw,17.5px);max-width:660px;margin:0}
+  .lede b{color:var(--text)}
+  .stats{display:flex;flex-wrap:wrap;gap:28px;margin:26px 0 6px}
+  .stat .n{font-size:26px;font-weight:800;letter-spacing:-.02em}.stat .n .accent{color:var(--accent)}
+  .stat .l{font-size:12.5px;color:var(--text-faint);font-weight:500}
+  .controls{position:sticky;top:60px;z-index:40;background:linear-gradient(180deg,var(--bg) 72%,rgba(11,14,20,0));padding:22px 0 14px}
+  .search-row{display:flex;gap:10px;align-items:center}
+  .search{position:relative;flex:1}
+  .search svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:18px;height:18px;stroke:var(--text-faint)}
+  .search input{width:100%;background:var(--surface);border:1px solid var(--border);color:var(--text);font-size:15px;font-family:var(--sans);padding:13px 14px 13px 44px;border-radius:11px;outline:none;transition:.15s}
+  .search input::placeholder{color:var(--text-faint)}
+  .search input:focus{border-color:var(--accent-line);box-shadow:0 0 0 3px var(--accent-glow);background:var(--surface-2)}
+  .search kbd{position:absolute;right:12px;top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:11px;color:var(--text-faint);border:1px solid var(--border);border-radius:6px;padding:3px 7px;background:var(--bg-soft)}
+  .types{display:flex;gap:6px}
+  .type-btn{font-size:12.5px;font-weight:600;color:var(--text-dim);background:var(--surface);border:1px solid var(--border);padding:11px 13px;border-radius:10px;cursor:pointer;transition:.15s;white-space:nowrap}
+  .type-btn:hover{color:var(--text);background:var(--surface-2)}
+  .type-btn.on{color:#1a0d08;background:var(--accent);border-color:var(--accent)}
+  .cats{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .cat-pill{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;color:var(--text-dim);background:var(--surface);border:1px solid var(--border-soft);padding:7px 12px;border-radius:999px;cursor:pointer;transition:.15s}
+  .cat-pill:hover{color:var(--text);border-color:var(--border)}
+  .cat-pill .cdot{width:8px;height:8px;border-radius:50%;background:var(--c,var(--accent))}
+  .cat-pill .cnt{color:var(--text-faint);font-weight:500;font-family:var(--mono);font-size:11px}
+  .cat-pill.on{background:var(--surface-3);border-color:var(--c,var(--accent));color:var(--text)}
+  .results-meta{color:var(--text-faint);font-size:13px;margin:22px 0 14px;font-weight:500}.results-meta b{color:var(--text-dim)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:14px;padding-bottom:28px}
+  .card{background:var(--surface);border:1px solid var(--border-soft);border-radius:var(--radius);padding:15px 16px 13px;display:flex;flex-direction:column;gap:9px;transition:border-color .15s,transform .15s,box-shadow .15s}
+  .card:hover{border-color:var(--border);transform:translateY(-2px);box-shadow:var(--shadow)}
+  .card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+  .cmdline{font-family:var(--mono);font-size:14.5px;font-weight:600;color:var(--accent-soft);word-break:break-word}
+  .cmdline .args{color:var(--text-faint);font-weight:400;font-size:12.5px}
+  .badge{flex-shrink:0;font-size:10.5px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;padding:4px 8px;border-radius:6px;white-space:nowrap}
+  .badge.builtin{color:var(--builtin);background:var(--builtin-bg)}
+  .badge.skill{color:var(--skill);background:var(--skill-bg)}
+  .badge.workflow{color:var(--workflow);background:var(--workflow-bg)}
+  .purpose{font-size:13.5px;color:var(--text-dim);margin:0}
+  .card-foot{display:flex;align-items:center;gap:8px;margin-top:auto;flex-wrap:wrap;padding-top:4px}
+  .tag{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;color:var(--text-faint);font-weight:500}
+  .tag .cdot{width:7px;height:7px;border-radius:50%;background:var(--c,var(--accent))}
+  .alias{font-size:11px;color:var(--text-faint);font-family:var(--mono)}
+  .copy{margin-left:auto;display:inline-flex;align-items:center;gap:5px;font-size:11px;color:var(--text-faint);background:var(--surface-2);border:1px solid var(--border);border-radius:7px;padding:4px 8px;cursor:pointer;transition:.15s;font-family:var(--mono)}
+  .copy:hover{color:var(--text);border-color:var(--accent-line);background:var(--accent-glow)}
+  .copy svg{width:12px;height:12px;stroke:currentColor;fill:none}.copy.done{color:var(--skill);border-color:var(--skill)}
+  .note{font-size:10.5px;color:var(--text-faint);border:1px solid var(--border-soft);border-radius:5px;padding:2px 6px;font-family:var(--mono)}
+  .empty{text-align:center;padding:60px 20px;color:var(--text-faint)}.empty .big{font-size:40px;margin-bottom:8px}
+  .author{margin:18px 0 50px;background:linear-gradient(135deg,var(--surface-2),var(--surface));border:1px solid var(--border);border-radius:var(--radius);padding:22px 24px}
+  .author h3{margin:0 0 6px;font-size:17px}
+  .author p{margin:0 0 14px;color:var(--text-dim);font-size:14px;max-width:720px}
+  .author pre{margin:0;background:var(--bg-soft);border:1px solid var(--border-soft);border-radius:var(--radius-sm);padding:14px;overflow-x:auto;font-family:var(--mono);font-size:12.5px;color:var(--text);line-height:1.6}
+  .author .k{color:var(--accent-soft)} .author .c{color:var(--text-faint)}
+  .author .links{margin-top:14px;display:flex;gap:14px;flex-wrap:wrap;font-size:13.5px;font-weight:600}
+  footer{border-top:1px solid var(--border-soft);padding:26px 0 50px;color:var(--text-faint);font-size:13px}
+  footer .frow{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;align-items:center}
+  footer a{color:var(--text-dim)}
+  @media (max-width:720px){.search-row{flex-wrap:wrap}.types{width:100%;overflow-x:auto}.type-btn{flex:1}.top-links{display:none}.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap top-inner">
+  <a class="brand" href="#"><span class="glyph">/</span><b>Claude Code Commands</b><span>official reference</span></a>
+  <div class="top-spacer"></div>
+  <nav class="top-links">
+    <a href="docs/getting-started.md">How commands work</a>
+    <a href="docs/bundled-skills.md">Bundled skills</a>
+    <a href="docs/authoring-skills.md">Build your own</a>
+  </nav>
+  <a class="gh" href="https://github.com" target="_blank" rel="noopener"><svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>Star</a>
+</div></header>
+
+<main class="wrap">
+  <section class="intro">
+    <div class="eyebrow"><span class="dot"></span> sourced from the official Claude Code docs</div>
+    <h1 class="title">Every Claude Code command, <span class="hl">searchable</span></h1>
+    <p class="lede">A reference for the slash commands built into <b>Claude Code</b> — the built-in commands, the bundled skills like <code>/code-review</code> and <code>/debug</code>, and the <code>/deep-research</code> workflow. Plus how to author your own. Press <b>/</b> to search.</p>
+    <div class="stats">
+      <div class="stat"><div class="n"><span class="accent" id="s-total">0</span></div><div class="l">total commands</div></div>
+      <div class="stat"><div class="n" id="s-builtin">0</div><div class="l">built-in</div></div>
+      <div class="stat"><div class="n" id="s-skill">0</div><div class="l">bundled skills</div></div>
+      <div class="stat"><div class="n" id="s-workflow">0</div><div class="l">workflows</div></div>
+    </div>
+  </section>
+
+  <section class="controls">
+    <div class="search-row">
+      <div class="search">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+        <input id="q" type="text" placeholder="Search commands, purpose, or alias…" autocomplete="off" spellcheck="false" />
+        <kbd>/</kbd>
+      </div>
+      <div class="types" id="types">
+        <button class="type-btn on" data-type="all">All</button>
+        <button class="type-btn" data-type="built-in">Built-in</button>
+        <button class="type-btn" data-type="skill">Skills</button>
+        <button class="type-btn" data-type="workflow">Workflow</button>
+      </div>
+    </div>
+    <div class="cats" id="cats"></div>
+  </section>
+
+  <div class="results-meta" id="meta"></div>
+  <div class="grid" id="grid"></div>
+
+  <section class="author">
+    <h3>🛠️ Build your own command</h3>
+    <p>Custom commands are just <b>skills</b>: a <code>SKILL.md</code> file in <code>.claude/skills/&lt;name&gt;/</code>. The directory name becomes the command. Pull in live data with <code>!`command`</code> and accept input with <code>$ARGUMENTS</code>.</p>
+    <pre><span class="c"># ~/.claude/skills/summarize-changes/SKILL.md</span>
+<span class="k">---</span>
+<span class="k">description:</span> Summarize uncommitted changes and flag risks.
+<span class="k">---</span>
+
+## Current changes
+!`git diff HEAD`
+
+## Instructions
+Summarize the changes above, then list any risks.</pre>
+    <div class="links">
+      <a href="docs/authoring-skills.md">Authoring guide →</a>
+      <a href="docs/arguments-and-injection.md">Arguments &amp; injection →</a>
+      <a href="templates/skill-template.md">SKILL.md template →</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap" style="margin-bottom:16px;padding:14px 16px;border:1px solid var(--border-soft);border-radius:var(--radius-sm);background:var(--surface);color:var(--text-dim);line-height:1.55">
+    <b style="color:var(--text)">⚠️ Disclaimer.</b> This is an independent, unofficial reference, <b style="color:var(--text)">not affiliated with or endorsed by Anthropic</b>. It is a point-in-time snapshot of public docs and may be incomplete or outdated. The
+    <a href="https://code.claude.com/docs/en/commands">official documentation</a> is the authoritative source — always verify there and type <code style="font-family:var(--mono)">/</code> in your own session to see what's available to you.
+  </div>
+  <div class="wrap frow">
+    <div>Data from the <a href="https://code.claude.com/docs/en/commands">official Claude Code documentation</a> · <a href="LICENSE">MIT Licensed</a></div>
+    <div>“Claude” &amp; “Claude Code” are trademarks of Anthropic · <a href="CONTRIBUTING.md">Contribute →</a></div>
+  </div>
+</footer>
+
+<script>
+const GROUPS = [["Setup & Config", "#ff6a3d"], ["Context & Sessions", "#4fd1c5"], ["Model & Reasoning", "#a78bfa"], ["Review & Ship", "#57c98a"], ["Parallel & Background", "#f2b84b"], ["Skills & API", "#60a5fa"], ["Account & Status", "#ff6a8a"], ["Remote & Devices", "#22d3ee"], ["Appearance & Misc", "#fb923c"]];
+const COMMANDS = [{"cmd": "/init", "args": "", "type": "built-in", "group": "Setup & Config", "purpose": "Initialize the project with a starter CLAUDE.md guide."}, {"cmd": "/memory", "args": "", "type": "built-in", "group": "Setup & Config", "purpose": "Edit CLAUDE.md memory files and manage auto-memory."}, {"cmd": "/mcp", "args": "", "type": "built-in", "group": "Setup & Config", "purpose": "Manage MCP server connections and OAuth authentication."}, {"cmd": "/agents", "args": "", "type": "built-in", "group": "Setup & Config", "purpose": "Manage subagent configurations."}, {"cmd": "/permissions", "args": "", "type": "built-in", "group": "Setup & Config", "purpose": "Manage allow, ask, and deny rules for tool permissions.", "aliases": "/allowed-tools"}, {"cmd": "/add-dir", "args": "<path>", "type": "built-in", "group": "Setup & Config", "purpose": "Add a working directory for file access during the session."}, {"cmd": "/hooks", "args": "", "type": "built-in", "group": "Setup & Config", "purpose": "View hook configurations for tool events."}, {"cmd": "/plugin", "args": "", "type": "built-in", "group": "Setup & Config", "purpose": "Manage Claude Code plugins."}, {"cmd": "/reload-plugins", "args": "", "type": "built-in", "group": "Setup & Config", "purpose": "Reload active plugins to apply changes without restarting."}, {"cmd": "/reload-skills", "args": "", "type": "built-in", "group": "Setup & Config", "purpose": "Re-scan skill and command directories mid-session."}, {"cmd": "/skills", "args": "", "type": "built-in", "group": "Setup & Config", "purpose": "List available skills; sort by token count, hide skills."}, {"cmd": "/config", "args": "", "type": "built-in", "group": "Setup & Config", "purpose": "Open Settings to adjust theme, model, output style, and more.", "aliases": "/settings"}, {"cmd": "/statusline", "args": "", "type": "built-in", "group": "Setup & Config", "purpose": "Configure Claude Code's status line."}, {"cmd": "/install-github-app", "args": "", "type": "built-in", "group": "Setup & Config", "purpose": "Set up the Claude GitHub Actions app for a repository."}, {"cmd": "/install-slack-app", "args": "", "type": "built-in", "group": "Setup & Config", "purpose": "Install the Claude Slack app via OAuth."}, {"cmd": "/web-setup", "args": "", "type": "built-in", "group": "Setup & Config", "purpose": "Connect GitHub to Claude Code on the web using your gh CLI."}, {"cmd": "/terminal-setup", "args": "", "type": "built-in", "group": "Setup & Config", "purpose": "Configure terminal keybindings (Shift+Enter, etc.)."}, {"cmd": "/keybindings", "args": "", "type": "built-in", "group": "Setup & Config", "purpose": "Open or create your keybindings configuration file."}, {"cmd": "/clear", "args": "[name]", "type": "built-in", "group": "Context & Sessions", "purpose": "Start a new conversation with empty context.", "aliases": "/reset, /new"}, {"cmd": "/compact", "args": "[instructions]", "type": "built-in", "group": "Context & Sessions", "purpose": "Summarize the conversation so far to free up context."}, {"cmd": "/context", "args": "[all]", "type": "built-in", "group": "Context & Sessions", "purpose": "Visualize current context usage as a colored grid."}, {"cmd": "/btw", "args": "<question>", "type": "built-in", "group": "Context & Sessions", "purpose": "Ask a quick side question without adding to the conversation."}, {"cmd": "/resume", "args": "[session]", "type": "built-in", "group": "Context & Sessions", "purpose": "Resume a conversation by ID or name, or open the picker.", "aliases": "/continue"}, {"cmd": "/branch", "args": "[name]", "type": "built-in", "group": "Context & Sessions", "purpose": "Branch the current conversation at this point.", "aliases": "/fork"}, {"cmd": "/rewind", "args": "", "type": "built-in", "group": "Context & Sessions", "purpose": "Rewind code and/or conversation to a previous checkpoint.", "aliases": "/checkpoint, /undo"}, {"cmd": "/rename", "args": "[name]", "type": "built-in", "group": "Context & Sessions", "purpose": "Rename the current session."}, {"cmd": "/export", "args": "[filename]", "type": "built-in", "group": "Context & Sessions", "purpose": "Export the current conversation as plain text."}, {"cmd": "/copy", "args": "[N]", "type": "built-in", "group": "Context & Sessions", "purpose": "Copy the last assistant response to the clipboard."}, {"cmd": "/recap", "args": "", "type": "built-in", "group": "Context & Sessions", "purpose": "Generate a one-line summary of the current session."}, {"cmd": "/goal", "args": "[condition|clear]", "type": "built-in", "group": "Context & Sessions", "purpose": "Keep working across turns until a condition is met."}, {"cmd": "/focus", "args": "", "type": "built-in", "group": "Context & Sessions", "purpose": "Toggle a minimal focus view (fullscreen rendering only)."}, {"cmd": "/insights", "args": "", "type": "built-in", "group": "Context & Sessions", "purpose": "Report on your sessions: areas, patterns, and friction points."}, {"cmd": "/model", "args": "[model]", "type": "built-in", "group": "Model & Reasoning", "purpose": "Switch the AI model and save it as your default."}, {"cmd": "/effort", "args": "[level|auto]", "type": "built-in", "group": "Model & Reasoning", "purpose": "Set the model effort/reasoning level (low\u2013max, ultracode)."}, {"cmd": "/fast", "args": "[on|off]", "type": "built-in", "group": "Model & Reasoning", "purpose": "Toggle fast mode."}, {"cmd": "/plan", "args": "[description]", "type": "built-in", "group": "Model & Reasoning", "purpose": "Enter plan mode before a large change."}, {"cmd": "/diff", "args": "", "type": "built-in", "group": "Review & Ship", "purpose": "Open an interactive diff viewer of uncommitted and per-turn changes."}, {"cmd": "/code-review", "args": "[low|\u2026|ultra] [--fix] [--comment] [target]", "type": "skill", "group": "Review & Ship", "purpose": "Review the diff for correctness bugs and cleanups; --fix applies findings, ultra runs a cloud review."}, {"cmd": "/review", "args": "[PR]", "type": "built-in", "group": "Review & Ship", "purpose": "Review a pull request locally in your current session."}, {"cmd": "/security-review", "args": "", "type": "built-in", "group": "Review & Ship", "purpose": "Analyze pending changes for security vulnerabilities like injection, auth, and data exposure."}, {"cmd": "/simplify", "args": "[target]", "type": "skill", "group": "Review & Ship", "purpose": "Cleanup-only review (reuse, simplification, efficiency) that applies fixes.", "note": "v2.1.154+"}, {"cmd": "/run", "args": "", "type": "skill", "group": "Review & Ship", "purpose": "Launch and drive your app to see a change working in the running app.", "note": "v2.1.145+"}, {"cmd": "/verify", "args": "", "type": "skill", "group": "Review & Ship", "purpose": "Build and run your app to confirm a change does what it should.", "note": "v2.1.145+"}, {"cmd": "/run-skill-generator", "args": "", "type": "skill", "group": "Review & Ship", "purpose": "Teach /run and /verify how to build and launch your project.", "note": "v2.1.145+"}, {"cmd": "/autofix-pr", "args": "[prompt]", "type": "built-in", "group": "Review & Ship", "purpose": "Spawn a web session that pushes fixes when CI fails or reviewers comment."}, {"cmd": "/batch", "args": "<instruction>", "type": "skill", "group": "Parallel & Background", "purpose": "Decompose a large change into 5\u201330 units and run each in its own git worktree subagent."}, {"cmd": "/tasks", "args": "", "type": "built-in", "group": "Parallel & Background", "purpose": "List and manage background tasks.", "aliases": "/bashes"}, {"cmd": "/background", "args": "[prompt]", "type": "built-in", "group": "Parallel & Background", "purpose": "Detach the session to run as a background agent and free the terminal.", "aliases": "/bg"}, {"cmd": "/stop", "args": "", "type": "built-in", "group": "Parallel & Background", "purpose": "Stop the current background session."}, {"cmd": "/loop", "args": "[interval] [prompt]", "type": "skill", "group": "Parallel & Background", "purpose": "Run a prompt repeatedly while the session stays open.", "aliases": "/proactive"}, {"cmd": "/workflows", "args": "", "type": "built-in", "group": "Parallel & Background", "purpose": "Open the workflow progress view to watch, pause, or save runs."}, {"cmd": "/ultraplan", "args": "<prompt>", "type": "built-in", "group": "Parallel & Background", "purpose": "Draft a plan in an ultraplan session, review in browser, then execute."}, {"cmd": "/ultrareview", "args": "[PR]", "type": "built-in", "group": "Parallel & Background", "purpose": "Deep multi-agent cloud code review (preferred: /code-review ultra)."}, {"cmd": "/deep-research", "args": "<question>", "type": "workflow", "group": "Parallel & Background", "purpose": "Fan out web searches, cross-check sources, and synthesize a cited report."}, {"cmd": "/schedule", "args": "[description]", "type": "built-in", "group": "Parallel & Background", "purpose": "Create, update, list, or run routines on Anthropic-managed cloud infra.", "aliases": "/routines"}, {"cmd": "/claude-api", "args": "[migrate|managed-agents-onboard]", "type": "skill", "group": "Skills & API", "purpose": "Load Claude API reference for your language; migrate code to a newer model."}, {"cmd": "/debug", "args": "[description]", "type": "skill", "group": "Skills & API", "purpose": "Enable debug logging and troubleshoot issues from the session debug log."}, {"cmd": "/fewer-permission-prompts", "args": "", "type": "skill", "group": "Skills & API", "purpose": "Scan transcripts and add an allowlist to settings to reduce permission prompts."}, {"cmd": "/login", "args": "", "type": "built-in", "group": "Account & Status", "purpose": "Sign in to your Anthropic account."}, {"cmd": "/logout", "args": "", "type": "built-in", "group": "Account & Status", "purpose": "Sign out from your Anthropic account."}, {"cmd": "/usage", "args": "", "type": "built-in", "group": "Account & Status", "purpose": "Show session cost, plan usage limits, and activity stats.", "aliases": "/cost, /stats"}, {"cmd": "/status", "args": "", "type": "built-in", "group": "Account & Status", "purpose": "Open Settings (Status tab): version, model, account, connectivity."}, {"cmd": "/doctor", "args": "", "type": "built-in", "group": "Account & Status", "purpose": "Diagnose and verify your Claude Code installation and settings."}, {"cmd": "/feedback", "args": "[report]", "type": "built-in", "group": "Account & Status", "purpose": "Submit feedback, report a bug, or share your conversation.", "aliases": "/bug, /share"}, {"cmd": "/usage-credits", "args": "", "type": "built-in", "group": "Account & Status", "purpose": "Configure usage credits to keep working when you hit a limit."}, {"cmd": "/upgrade", "args": "", "type": "built-in", "group": "Account & Status", "purpose": "Open the upgrade page to switch to a higher plan tier."}, {"cmd": "/release-notes", "args": "", "type": "built-in", "group": "Account & Status", "purpose": "View the changelog in an interactive version picker."}, {"cmd": "/heapdump", "args": "", "type": "built-in", "group": "Account & Status", "purpose": "Write a heap snapshot for diagnosing high memory usage."}, {"cmd": "/help", "args": "", "type": "built-in", "group": "Account & Status", "purpose": "Show help and available commands."}, {"cmd": "/exit", "args": "", "type": "built-in", "group": "Account & Status", "purpose": "Exit the CLI (detaches an attached background session).", "aliases": "/quit"}, {"cmd": "/teleport", "args": "", "type": "built-in", "group": "Remote & Devices", "purpose": "Pull a Claude Code on the web session into this terminal.", "aliases": "/tp"}, {"cmd": "/remote-control", "args": "", "type": "built-in", "group": "Remote & Devices", "purpose": "Make this session available for remote control from claude.ai.", "aliases": "/rc"}, {"cmd": "/remote-env", "args": "", "type": "built-in", "group": "Remote & Devices", "purpose": "Configure the default remote environment for web sessions."}, {"cmd": "/desktop", "args": "", "type": "built-in", "group": "Remote & Devices", "purpose": "Continue the current session in the Claude Code Desktop app.", "aliases": "/app"}, {"cmd": "/mobile", "args": "", "type": "built-in", "group": "Remote & Devices", "purpose": "Show a QR code to download the Claude mobile app.", "aliases": "/ios, /android"}, {"cmd": "/chrome", "args": "", "type": "built-in", "group": "Remote & Devices", "purpose": "Configure Claude in Chrome settings."}, {"cmd": "/sandbox", "args": "", "type": "built-in", "group": "Remote & Devices", "purpose": "Toggle sandbox mode (supported platforms only)."}, {"cmd": "/team-onboarding", "args": "", "type": "built-in", "group": "Remote & Devices", "purpose": "Generate a team onboarding guide from your usage history."}, {"cmd": "/theme", "args": "", "type": "built-in", "group": "Appearance & Misc", "purpose": "Change the color theme (light, dark, daltonized, custom)."}, {"cmd": "/color", "args": "[color|default]", "type": "built-in", "group": "Appearance & Misc", "purpose": "Set the prompt bar color for the current session."}, {"cmd": "/tui", "args": "[default|fullscreen]", "type": "built-in", "group": "Appearance & Misc", "purpose": "Set the terminal UI renderer and relaunch into it."}, {"cmd": "/scroll-speed", "args": "", "type": "built-in", "group": "Appearance & Misc", "purpose": "Adjust mouse wheel scroll speed (fullscreen only)."}, {"cmd": "/voice", "args": "[hold|tap|off]", "type": "built-in", "group": "Appearance & Misc", "purpose": "Toggle voice dictation, or enable a specific mode."}, {"cmd": "/powerup", "args": "", "type": "built-in", "group": "Appearance & Misc", "purpose": "Discover features through quick interactive lessons."}, {"cmd": "/radio", "args": "", "type": "built-in", "group": "Appearance & Misc", "purpose": "Open Claude FM lo-fi radio in your browser."}, {"cmd": "/stickers", "args": "", "type": "built-in", "group": "Appearance & Misc", "purpose": "Order Claude Code stickers."}];
+const TYPE_LABEL = {"built-in":"Built-in","skill":"Skill","workflow":"Workflow"};
+const state={q:"",type:"all",cats:new Set()};
+const grid=document.getElementById("grid"),meta=document.getElementById("meta");
+document.getElementById("s-total").textContent=COMMANDS.length;
+document.getElementById("s-builtin").textContent=COMMANDS.filter(c=>c.type==="built-in").length;
+document.getElementById("s-skill").textContent=COMMANDS.filter(c=>c.type==="skill").length;
+document.getElementById("s-workflow").textContent=COMMANDS.filter(c=>c.type==="workflow").length;
+
+const catsEl=document.getElementById("cats");
+GROUPS.forEach(([name,color])=>{
+  const count=COMMANDS.filter(c=>c.group===name).length;
+  const pill=document.createElement("button");
+  pill.className="cat-pill";pill.style.setProperty("--c",color);
+  pill.innerHTML=`<span class="cdot"></span>${name}<span class="cnt">${count}</span>`;
+  pill.onclick=()=>{state.cats.has(name)?(state.cats.delete(name),pill.classList.remove("on")):(state.cats.add(name),pill.classList.add("on"));render();};
+  catsEl.appendChild(pill);
+});
+document.getElementById("types").addEventListener("click",e=>{const b=e.target.closest(".type-btn");if(!b)return;state.type=b.dataset.type;document.querySelectorAll(".type-btn").forEach(x=>x.classList.toggle("on",x===b));render();});
+const qEl=document.getElementById("q");
+qEl.addEventListener("input",e=>{state.q=e.target.value.toLowerCase().trim();render();});
+document.addEventListener("keydown",e=>{if(e.key==="/"&&document.activeElement!==qEl){e.preventDefault();qEl.focus();}if(e.key==="Escape"&&document.activeElement===qEl){qEl.value="";state.q="";qEl.blur();render();}});
+function esc(s){return (s||"").replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));}
+function colorFor(g){const m=GROUPS.find(x=>x[0]===g);return m?m[1]:"#ff6a3d";}
+function render(){
+  const list=COMMANDS.filter(c=>{
+    if(state.type!=="all"&&c.type!==state.type)return false;
+    if(state.cats.size&&!state.cats.has(c.group))return false;
+    if(state.q){const hay=(c.cmd+" "+c.purpose+" "+c.group+" "+(c.aliases||"")).toLowerCase();if(!hay.includes(state.q))return false;}
+    return true;
+  });
+  meta.innerHTML=`Showing <b>${list.length}</b> of ${COMMANDS.length} commands`+(state.type!=="all"?` · ${TYPE_LABEL[state.type]}`:"")+(state.cats.size?` · ${[...state.cats].join(", ")}`:"")+(state.q?` · matching “${esc(state.q)}”`:"");
+  if(!list.length){grid.innerHTML=`<div class="empty" style="grid-column:1/-1"><div class="big">∅</div>No commands match your filters.</div>`;return;}
+  grid.innerHTML=list.map(c=>{
+    const color=colorFor(c.group);const tb=c.type.replace("-","");
+    return `<article class="card">
+      <div class="card-top">
+        <div class="cmdline">${esc(c.cmd)}${c.args?` <span class="args">${esc(c.args)}</span>`:""}</div>
+        <span class="badge ${tb}">${TYPE_LABEL[c.type]}</span>
+      </div>
+      <p class="purpose">${esc(c.purpose)}</p>
+      <div class="card-foot">
+        <span class="tag" style="--c:${color}"><span class="cdot"></span>${esc(c.group)}</span>
+        ${c.aliases?`<span class="alias">${esc(c.aliases)}</span>`:""}
+        ${c.note?`<span class="note">${esc(c.note)}</span>`:""}
+        <button class="copy" data-c="${esc(c.cmd)}"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>copy</button>
+      </div>
+    </article>`;
+  }).join("");
+  grid.querySelectorAll(".copy").forEach(btn=>{btn.onclick=async()=>{const t=btn.dataset.c;try{await navigator.clipboard.writeText(t);}catch(e){const ta=document.createElement("textarea");ta.value=t;document.body.appendChild(ta);ta.select();document.execCommand("copy");ta.remove();}btn.classList.add("done");btn.innerHTML=`<svg viewBox="0 0 24 24" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>copied`;setTimeout(()=>{btn.classList.remove("done");btn.innerHTML=`<svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>copy`;},1300);};});
+}
+render();
+</script>
+</body>
+</html>
