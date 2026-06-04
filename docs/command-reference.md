@@ -1,6 +1,6 @@
 # 📖 Command Reference
 
-> Every slash command included in Claude Code, grouped by where it fits in your workflow. Sourced from the [official commands reference](https://code.claude.com/docs/en/commands).
+> A curated Claude Code slash command reference, grouped by workflow phase. Sourced from the [official commands reference](https://code.claude.com/docs/en/commands). Claude Code changes frequently — always verify against the live docs for your version.
 
 [← Back to README](../README.md) · [🖥️ Interactive reference](../index.html) · [Bundled skills](bundled-skills.md) · [Build your own](authoring-skills.md)
 

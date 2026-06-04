@@ -2,9 +2,9 @@
 
 # ⚡ Claude Code Slash Commands
 
-### A searchable reference for every slash command in Claude Code — and how to build your own
+### A searchable Claude Code slash command reference — with examples, workflows, and custom skill templates
 
-Built-in commands, bundled skills, and workflows, sourced from Anthropic's official documentation. Plus a complete guide to authoring custom commands as skills.
+A curated reference for built-in commands, bundled skills, and workflows, sourced from Anthropic's official documentation. Plus a complete guide to authoring custom commands as skills.
 
 <br />
 
@@ -12,9 +12,10 @@ Built-in commands, bundled skills, and workflows, sourced from Anthropic's offic
 [![License: MIT](https://img.shields.io/badge/License-MIT-4fd1c5?style=for-the-badge)](LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-57c98a?style=for-the-badge)](CONTRIBUTING.md)
 
-![Commands](https://img.shields.io/badge/commands-86-ff6a3d)
+![Commands](https://img.shields.io/badge/commands-86%2B-ff6a3d)
 ![Bundled skills](https://img.shields.io/badge/bundled%20skills-10-57c98a)
 ![Source](https://img.shields.io/badge/source-official%20docs-60a5fa)
+![Last verified](https://img.shields.io/badge/last%20verified-June%202025-lightgrey)
 
 <br />
 
@@ -27,8 +28,20 @@ Built-in commands, bundled skills, and workflows, sourced from Anthropic's offic
 > [!IMPORTANT]
 > **Disclaimer:** This is an **independent, unofficial** community resource. It is **not affiliated with, endorsed by, or sponsored by Anthropic**. See the full [Disclaimer](#%EF%B8%8F-disclaimer) below. Everything here is sourced from the official [Claude Code documentation](#-official-documentation) — always verify against the live docs, since Claude Code changes often.
 
+## 👤 Who this is for
+
+This repository is for developers using Claude Code who want a fast, searchable way to understand slash commands, when to use them, and how to build their own custom commands using skills. It is especially useful for:
+
+- Developers new to Claude Code who want a quick command overview
+- Teams standardizing Claude Code workflows across a project
+- Engineers building reusable custom skills for their codebase
+- Maintainers documenting AI-assisted development practices
+
+---
+
 ## 📑 Table of Contents
 
+- [Who this is for](#-who-this-is-for)
 - [Disclaimer](#%EF%B8%8F-disclaimer)
 - [Official documentation](#-official-documentation)
 - [What slash commands are](#-what-slash-commands-are)
@@ -110,6 +123,8 @@ And the fourth, most powerful option: **commands you write yourself** as [skills
 /code-review --fix
 ```
 
+For more in-depth examples — `/code-review ultra --comment`, `/batch`, `/loop`, `/deep-research`, and combined workflows — see [Advanced Command Examples](examples/advanced-command-examples.md).
+
 ---
 
 ## 🗂️ Browse the commands
@@ -118,7 +133,7 @@ And the fourth, most powerful option: **commands you write yourself** as [skills
 
 | Section | What's inside | Open |
 | :-- | :-- | :-- |
-| 🖥️ **Interactive reference** | All 86 commands, searchable & filterable | [→](index.html) |
+| 🖥️ **Interactive reference** | 86+ commands, searchable & filterable | [→](index.html) |
 | 📖 **Command reference** | The full table, grouped by workflow phase | [→](docs/command-reference.md) |
 | 🧩 **Bundled skills** | `/code-review`, `/debug`, `/batch`, `/run`… | [→](docs/bundled-skills.md) |
 | 🔀 **Bundled workflows** | `/deep-research` and the workflow view | [→](docs/bundled-workflows.md) |
@@ -161,12 +176,14 @@ The `` !`git diff HEAD` `` line injects the live diff before Claude reads the pr
 | Guide | What you'll learn |
 | :-- | :-- |
 | [Getting Started](docs/getting-started.md) | How commands work; the three kinds |
-| [Command Reference](docs/command-reference.md) | Every command, grouped by workflow |
+| [Command Reference](docs/command-reference.md) | Curated command list, grouped by workflow phase |
 | [Bundled Skills](docs/bundled-skills.md) | The prompt-based commands that ship with Claude Code |
 | [Bundled Workflows](docs/bundled-workflows.md) | `/deep-research` and managing background work |
 | [Authoring Skills](docs/authoring-skills.md) | Build and share your own commands |
 | [Arguments & Injection](docs/arguments-and-injection.md) | Pass input and inject live data |
 | [Best Practices](docs/best-practices.md) | Write skills that stay reliable |
+| [Advanced Command Examples](examples/advanced-command-examples.md) | Deep dives on `/code-review`, `/batch`, `/loop`, `/deep-research`, and more |
+| [Custom Skill Examples](examples/custom-skill-examples.md) | Copy-ready `SKILL.md` files |
 
 ---
 
