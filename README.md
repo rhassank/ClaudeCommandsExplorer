@@ -19,7 +19,7 @@ A curated reference for built-in commands, bundled skills, and workflows, source
 
 <br />
 
-**[🖥️ Open the interactive reference →](index.html)** &nbsp;·&nbsp; **[📖 Command reference](docs/command-reference.md)** &nbsp;·&nbsp; **[🛠️ Build your own](docs/authoring-skills.md)**
+**[🖥️ Open the interactive reference →](index.html)** &nbsp;·&nbsp; **[📖 Command reference](docs/command-reference.md)** &nbsp;·&nbsp; **[🛠️ Build your own](docs/authoring-skills.md)** &nbsp;·&nbsp; **[🔗 Live demo](https://rhassank.github.io/ClaudeCommandsExplorer/)**
 
 </div>
 
